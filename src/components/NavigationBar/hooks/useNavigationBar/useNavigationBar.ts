@@ -1,5 +1,5 @@
 // import { useState, useEffect } from 'react';
-import { NavigationBarProps } from '../../NavigationBar.d';
+import { NavigationBarProps } from '@components/NavigationBar/NavigationBar.d';
 
 export function useNavigationBar() {
     const items: NavigationBarProps['items'] = [{
