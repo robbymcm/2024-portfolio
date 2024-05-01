@@ -3,6 +3,7 @@ export type DropdownItemProps = {
     label: string;
     highlighted: boolean;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    extendedClass?: string;
 };
 
 export type DropdownProps = {

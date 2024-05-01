@@ -5,20 +5,11 @@ import { DropdownItemProps } from "../Dropdown/Dropdown.d";
 export const GameContext = createContext<GameContextType | null>(null);
 
 export type GameContextType = {
-    numberOfItems: number;
-    createItems: () => DropdownItemProps[];
-    startGame: () => void;
-    pauseGame: () => void;
-    restartGame: () => void;
-    highlightItem: (id: string) => void;
-    sec: number;
-    playing: boolean;
-    paused: boolean;
-    items: DropdownItemProps[];
     gameMethods: {
         startGame: () => void;
         pauseGame: () => void;
         restartGame: () => void;
+        updateScore: () => void;
         createItems: () => DropdownItemProps[];
         highlightItem: (id: string) => void;
     };
@@ -27,8 +18,9 @@ export type GameContextType = {
         playing: boolean;
         paused: boolean;
         items: DropdownItemProps[];
+        numberOfItems: number;
         score: number;
-        attempts: number;
+        // attempts: number;
     }
 }
 
@@ -100,19 +92,27 @@ export function GameContextProvider({ children }: { children: JSX.Element; }) {
         }
     }
 
-
-    return <GameContext.Provider value={{
-        numberOfItems: items.length,
-        createItems,
+    const gameMethods = {
         startGame,
         pauseGame,
         restartGame,
-        playing,
+        updateScore,
+        createItems,
+        highlightItem
+    };
+
+    const gameData = {
         sec,
+        playing,
         paused,
-        highlightItem,
         items,
-    }}>
+        numberOfItems: items.length,
+        score,
+        // attempts
+    };
+
+
+    return <GameContext.Provider value={{ gameData, gameMethods, }}>
         {children}
     </GameContext.Provider>;
 }

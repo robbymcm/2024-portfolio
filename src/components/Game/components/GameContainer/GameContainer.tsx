@@ -5,19 +5,13 @@ import { DropdownProps } from "../Dropdown/Dropdown.d";
 import './GameContainer.scss';
 
 export default function GameContainer() {
-    const {
-        playing,
-        startGame,
-        pauseGame,
-        restartGame,
-        sec,
-        paused,
-        items
-    } = useGameContext();
+    const { gameData, gameMethods } = useGameContext();
+    const { playing, sec, paused, items } = gameData;
+    const { startGame, pauseGame, restartGame, } = gameMethods;
 
     const dropDownProps: DropdownProps = {
         id: 'game',
-        title: 'Game',
+        title: 'Whack a button',
         items,
     };
 
@@ -43,11 +37,10 @@ export default function GameContainer() {
                         >Restart</button>}
                 </div>
             </div>
-
+            <div className='game-container__seconds'>Seconds: {sec}</div>
             <div className='game'>
                 <Dropdown {...dropDownProps} />
             </div>
-            <div className='game-container__seconds'>Seconds: {sec}</div>
         </div>
     </>;
 }
